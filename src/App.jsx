@@ -56,6 +56,7 @@ const App = () => {
     });
 
     const [deleteTarget, setDeleteTarget] = useState(null);
+    const [confirmation, setConfirmation] = useState(null);
 
     const {
         assignments,
@@ -192,18 +193,21 @@ const App = () => {
             formData.status !== "todo",
         );
 
-        if (
-            hasChanges &&
-            !window.confirm(
-                "Reset the form? All entered values will be cleared.",
-            )
-        ) {
+        if (!hasChanges) {
+            resetForm();
+
             return;
         }
 
-        resetForm();
-
-        showToast("Form reset.", "info");
+        setConfirmation({
+            type: "reset",
+            title: "Reset Form?",
+            message:
+                "All values entered in the assignment form will be cleared.",
+            confirmText: "Reset Form",
+            cancelText: "Keep Editing",
+            action: "reset",
+        });
     };
 
     const handleSaveEdit = (event) => {
@@ -337,19 +341,36 @@ const App = () => {
             return;
         }
 
-        const confirmed = window.confirm(
-            `Clear all ${assignments.length} assignments?\n\nThis cannot be undone.`,
-        );
+        setConfirmation({
+            type: "danger",
+            title: "Clear All Assignments?",
+            message: `This will permanently delete all ${assignments.length} assignments. This action cannot be undone.`,
+            confirmText: "Clear All",
+            cancelText: "Keep Assignments",
+            action: "clearAll",
+        });
+    };
 
-        if (!confirmed) {
+    const handleConfirmation = () => {
+        if (!confirmation) {
             return;
         }
 
-        clearAllAssignments();
+        if (confirmation.action === "reset") {
+            resetForm();
 
-        setIsToolsOpen(false);
+            showToast("Form reset.", "info");
+        }
 
-        showToast("All assignments cleared.", "success");
+        if (confirmation.action === "clearAll") {
+            clearAllAssignments();
+
+            setIsToolsOpen(false);
+
+            showToast("All assignments cleared.", "success");
+        }
+
+        setConfirmation(null);
     };
 
     const plannerContent = useMemo(
@@ -509,6 +530,17 @@ const App = () => {
                     />
                 </Suspense>
             )}
+
+            <ConfirmModal
+                isOpen={Boolean(confirmation)}
+                type={confirmation?.type}
+                title={confirmation?.title}
+                message={confirmation?.message}
+                confirmText={confirmation?.confirmText}
+                cancelText={confirmation?.cancelText}
+                onConfirm={handleConfirmation}
+                onClose={() => setConfirmation(null)}
+            />
         </Styled.Wrapper>
     );
 };

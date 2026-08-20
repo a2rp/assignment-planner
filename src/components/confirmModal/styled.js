@@ -83,14 +83,11 @@ export const Styled = {
             display: grid;
             place-items: center;
 
-            border: 1px solid
-                color-mix(in srgb, var(--danger-color) 34%, var(--border-color));
-
+            border: 1px solid var(--border-color);
             border-radius: 14px;
 
-            background: var(--danger-soft-color);
-
-            color: var(--danger-color);
+            background: var(--surface-soft-color);
+            color: var(--text-soft-color);
 
             svg {
                 width: 21px;
@@ -102,7 +99,7 @@ export const Styled = {
             margin-top: 18px;
 
             .label {
-                color: var(--danger-color);
+                color: var(--text-muted-color);
 
                 font-size: 0.62rem;
                 font-weight: 700;
@@ -139,7 +136,7 @@ export const Styled = {
         }
 
         .cancelButton,
-        .deleteButton {
+        .confirmButton {
             min-height: 42px;
 
             padding: 8px 12px;
@@ -161,7 +158,13 @@ export const Styled = {
                 background 160ms ease,
                 border-color 160ms ease,
                 color 160ms ease,
-                transform 160ms ease;
+                transform 160ms ease,
+                filter 160ms ease;
+
+            svg {
+                width: 14px;
+                height: 14px;
+            }
 
             &:hover {
                 transform: translateY(-1px);
@@ -174,7 +177,6 @@ export const Styled = {
 
         .cancelButton {
             background: var(--surface-soft-color);
-
             color: var(--text-soft-color);
 
             &:hover {
@@ -186,20 +188,47 @@ export const Styled = {
             }
         }
 
-        .deleteButton {
-            border-color: var(--danger-color);
-
-            background: var(--danger-color);
-
-            color: #ffffff;
-
-            svg {
-                width: 14px;
-                height: 14px;
-            }
+        .confirmButton {
+            background: var(--text-color);
+            color: var(--background-color);
 
             &:hover {
                 filter: brightness(1.08);
+            }
+        }
+
+        &.danger {
+            .icon {
+                border-color: color-mix(
+                    in srgb,
+                    var(--danger-color) 34%,
+                    var(--border-color)
+                );
+
+                background: var(--danger-soft-color);
+                color: var(--danger-color);
+            }
+
+            .content .label {
+                color: var(--danger-color);
+            }
+
+            .confirmButton {
+                border-color: var(--danger-color);
+                background: var(--danger-color);
+                color: #ffffff;
+            }
+        }
+
+        &.reset {
+            .icon {
+                border-color: color-mix(
+                    in srgb,
+                    var(--primary-color) 28%,
+                    var(--border-color)
+                );
+
+                color: var(--text-color);
             }
         }
 

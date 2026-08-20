@@ -1,13 +1,14 @@
 import React from "react";
-import { FiAlertTriangle, FiTrash2, FiX } from "react-icons/fi";
+import { FiAlertTriangle, FiRefreshCw, FiTrash2, FiX } from "react-icons/fi";
 
 import { Styled } from "./styled";
 
 const ConfirmModal = ({
     isOpen,
-    title = "Delete Assignment?",
+    type = "danger",
+    title = "Are you sure?",
     message = "",
-    confirmText = "Delete",
+    confirmText = "Confirm",
     cancelText = "Cancel",
     onConfirm,
     onClose,
@@ -22,8 +23,17 @@ const ConfirmModal = ({
         }
     };
 
+    const getIcon = () => {
+        if (type === "reset") {
+            return <FiRefreshCw />;
+        }
+
+        return type === "danger" ? <FiTrash2 /> : <FiAlertTriangle />;
+    };
+
     return (
         <Styled.Wrapper
+            className={type}
             onMouseDown={handleBackdropClick}
             role="dialog"
             aria-modal="true"
@@ -37,15 +47,13 @@ const ConfirmModal = ({
                     type="button"
                     className="closeButton"
                     onClick={onClose}
-                    aria-label="Close"
+                    aria-label="Close confirmation"
                     title="Close"
                 >
                     <FiX />
                 </button>
 
-                <div className="icon">
-                    <FiAlertTriangle />
-                </div>
+                <div className="icon">{getIcon()}</div>
 
                 <div className="content">
                     <span className="label">Confirmation required</span>
@@ -66,10 +74,10 @@ const ConfirmModal = ({
 
                     <button
                         type="button"
-                        className="deleteButton"
+                        className="confirmButton"
                         onClick={onConfirm}
                     >
-                        <FiTrash2 />
+                        {getIcon()}
 
                         <span>{confirmText}</span>
                     </button>
