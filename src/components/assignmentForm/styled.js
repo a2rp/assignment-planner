@@ -154,22 +154,6 @@ export const Styled = {
             }
         }
 
-        [data-theme="dark"]
-            &
-            .datePickerField
-            input[type="date"]::-webkit-calendar-picker-indicator {
-            filter: invert(1);
-            opacity: 0.8;
-        }
-
-        [data-theme="light"]
-            &
-            .datePickerField
-            input[type="date"]::-webkit-calendar-picker-indicator {
-            filter: none;
-            opacity: 0.7;
-        }
-
         .estimateField {
             position: relative;
 
