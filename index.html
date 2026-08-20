@@ -1,252 +1,73 @@
 <!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Ashish Ranjan - Assignment Planner</title>
-    <link rel="stylesheet" href="./style.css" />
-    <meta name="color-scheme" content="dark light" />
-    <link rel="icon" type="image/svg+xml" href="./images/favicon.ico" />
-</head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<body>
-    <header class="app-header">
-        <h1>Assignment Planner</h1>
+        <meta
+            name="description"
+            content="A modern assignment planner for tracking coursework, deadlines, priorities, progress, reminders, CSV data, and calendar events."
+        />
 
-        <div class="header-actions">
-            <button id="notifyPermissionBtn" class="btn">🔔 Enable Reminders</button>
-            <div class="divider" aria-hidden="true"></div>
-            <button id="exportCsvBtn" class="btn">⬇️ Export CSV</button>
-            <label class="btn">
-                ⬆️ Import CSV
-                <input id="importCsvInput" type="file" accept=".csv,text/csv" hidden />
-            </label>
-            <div class="divider" aria-hidden="true"></div>
-            <button id="printBtn" class="btn">🖨️ Print</button>
-            <button id="clearAllBtn" class="btn btn-danger">♻️ Clear All</button>
-        </div>
-    </header>
+        <meta name="author" content="Ashish Ranjan" />
 
-    <main class="layout">
-        <!-- Left column: create/edit -->
-        <aside class="left-panel">
-            <form id="createForm" class="card" autocomplete="off">
-                <h2>Add Assignment</h2>
+        <meta name="theme-color" content="#080808" />
 
-                <div class="form-grid">
-                    <label>
-                        <span>Title*</span>
-                        <input id="titleInput" type="text" placeholder="e.g., OS lab report" required />
-                    </label>
+        <!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="./favicon.ico" />
 
-                    <label>
-                        <span>Course</span>
-                        <input id="courseInput" type="text" placeholder="e.g., CS301" />
-                    </label>
+        <!-- Open Graph -->
+        <meta property="og:title" content="Assignment Planner" />
 
-                    <label>
-                        <span>Due Date*</span>
-                        <input id="dueDateInput" type="date" required />
-                    </label>
+        <meta
+            property="og:description"
+            content="Plan assignments, track deadlines, manage priorities, monitor progress, and stay organized with a focused assignment planner."
+        />
 
-                    <label>
-                        <span>Due Time</span>
-                        <input id="dueTimeInput" type="time" />
-                    </label>
+        <meta property="og:type" content="website" />
 
-                    <label>
-                        <span>Priority</span>
-                        <select id="priorityInput">
-                            <option value="Medium">Medium</option>
-                            <option value="High">High</option>
-                            <option value="Low">Low</option>
-                        </select>
-                    </label>
+        <meta
+            property="og:url"
+            content="https://a2rp.github.io/assignment-planner/"
+        />
 
-                    <label>
-                        <span>Estimate (hrs)</span>
-                        <input id="estimateInput" type="number" min="0" step="0.5" value="1" />
-                    </label>
+        <meta
+            property="og:image"
+            content="https://a2rp.github.io/assignment-planner/preview.png"
+        />
 
-                    <label class="span-2">
-                        <span>Notes</span>
-                        <textarea id="notesInput" rows="3" placeholder="Any extra details…"></textarea>
-                    </label>
+        <meta property="og:image:width" content="1200" />
 
-                    <label>
-                        <span>Reminder</span>
-                        <select id="reminderAheadInput" title="When to notify before due time">
-                            <option value="0">At due time</option>
-                            <option value="15">15 minutes before</option>
-                            <option value="30" selected>30 minutes before</option>
-                            <option value="60">1 hour before</option>
-                            <option value="1440">1 day before</option>
-                            <option value="-1">No reminder</option>
-                        </select>
-                    </label>
+        <meta property="og:image:height" content="630" />
 
-                    <label>
-                        <span>Status</span>
-                        <select id="statusInput">
-                            <option value="todo" selected>To-do</option>
-                            <option value="doing">Doing</option>
-                            <option value="done">Done</option>
-                        </select>
-                    </label>
-                </div>
+        <meta property="og:image:alt" content="Assignment Planner preview" />
 
-                <div class="actions">
-                    <button type="submit" class="btn btn-primary">➕ Add</button>
-                    <button type="button" id="resetFormBtn" class="btn">Reset</button>
-                </div>
+        <meta property="og:site_name" content="Assignment Planner" />
 
-                <p class="help-text">
-                    Tip: Click a row to edit. Use filters to find things fast. Enable 🔔 to get native reminders.
-                </p>
-            </form>
+        <!-- Twitter / X -->
+        <meta name="twitter:card" content="summary_large_image" />
 
-            <section class="card mini-stats">
-                <h2>Summary</h2>
-                <div class="stats-grid">
-                    <div class="kpi">
-                        <span id="kpiTotal">0</span>
-                        <small>Total</small>
-                    </div>
-                    <div class="kpi">
-                        <span id="kpiTodo">0</span>
-                        <small>To-do</small>
-                    </div>
-                    <div class="kpi">
-                        <span id="kpiDoing">0</span>
-                        <small>Doing</small>
-                    </div>
-                    <div class="kpi">
-                        <span id="kpiDone">0</span>
-                        <small>Done</small>
-                    </div>
-                    <div class="kpi">
-                        <span id="kpiOverdue">0</span>
-                        <small>Overdue</small>
-                    </div>
-                </div>
-            </section>
-        </aside>
+        <meta name="twitter:title" content="Assignment Planner" />
 
-        <!-- Right column: filters + list -->
-        <section class="list-panel">
-            <div class="card filters">
-                <div class="filters-grid">
-                    <input id="searchInput" type="search" placeholder="Search title/notes…" />
-                    <select id="filterCourse">
-                        <option value="">All courses</option>
-                    </select>
-                    <select id="filterPriority">
-                        <option value="">All priorities</option>
-                        <option>High</option>
-                        <option>Medium</option>
-                        <option>Low</option>
-                    </select>
-                    <select id="filterStatus">
-                        <option value="">All status</option>
-                        <option value="todo">To-do</option>
-                        <option value="doing">Doing</option>
-                        <option value="done">Done</option>
-                    </select>
-                    <label class="checkbox">
-                        <input id="hideDoneCheck" type="checkbox" />
-                        <span>Hide done</span>
-                    </label>
-                    <select id="sortSelect" title="Sort">
-                        <option value="dueAsc">Due soon</option>
-                        <option value="priorityDesc">Priority</option>
-                        <option value="courseAsc">Course</option>
-                        <option value="titleAsc">Title</option>
-                        <option value="statusAsc">Status</option>
-                    </select>
-                    <button id="clearFiltersBtn" class="btn">Clear filters</button>
-                </div>
-            </div>
+        <meta
+            name="twitter:description"
+            content="Plan assignments, track deadlines, manage priorities, monitor progress, and stay organized."
+        />
 
-            <div class="card table-card">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Course</th>
-                            <th>Due</th>
-                            <th>Priority</th>
-                            <th>Estimate</th>
-                            <th>Status</th>
-                            <th>Reminder</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="rowsTbody" aria-live="polite"></tbody>
-                </table>
-            </div>
+        <meta
+            name="twitter:image"
+            content="https://a2rp.github.io/assignment-planner/preview.png"
+        />
 
-        </section>
-    </main>
+        <meta name="twitter:image:alt" content="Assignment Planner preview" />
 
-    <!-- Edit dialog -->
-    <dialog id="editDialog">
-        <form method="dialog" class="edit-form">
-            <h3>Edit Assignment</h3>
-            <input type="hidden" id="editId" />
+        <title>Assignment Planner - Ashish Ranjan</title>
+    </head>
 
-            <label><span>Title</span><input id="editTitle" type="text" /></label>
-            <label><span>Course</span><input id="editCourse" type="text" /></label>
-            <label><span>Due Date</span><input id="editDate" type="date" /></label>
-            <label><span>Due Time</span><input id="editTime" type="time" /></label>
-            <label>
-                <span>Priority</span>
-                <select id="editPriority">
-                    <option>High</option>
-                    <option selected>Medium</option>
-                    <option>Low</option>
-                </select>
-            </label>
-            <label><span>Estimate (hrs)</span><input id="editEstimate" type="number" min="0" step="0.5" /></label>
-            <label>
-                <span>Status</span>
-                <select id="editStatus">
-                    <option value="todo">To-do</option>
-                    <option value="doing">Doing</option>
-                    <option value="done">Done</option>
-                </select>
-            </label>
-            <label class="span-2"><span>Notes</span><textarea id="editNotes" rows="3"></textarea></label>
-            <label>
-                <span>Reminder</span>
-                <select id="editReminder">
-                    <option value="0">At due time</option>
-                    <option value="15">15 minutes before</option>
-                    <option value="30">30 minutes before</option>
-                    <option value="60">1 hour before</option>
-                    <option value="1440">1 day before</option>
-                    <option value="-1">No reminder</option>
-                </select>
-            </label>
+    <body>
+        <div id="root"></div>
 
-            <menu>
-                <button value="cancel" class="btn">Cancel</button>
-                <button id="deleteBtn" value="delete" class="btn btn-danger">Delete</button>
-                <button id="saveBtn" value="save" class="btn btn-primary">Save</button>
-            </menu>
-        </form>
-    </dialog>
-
-    <footer class="app-footer">
-        <small>
-            <span>&copy; <span id="year"></span></span>
-            <a href="https://www.ashishranjan.net" target="_blank">By Ashish Ranjan</a>
-        </small>
-    </footer>
-
-    <div id="toast" role="status" aria-live="polite"></div>
-
-    <script src="./script.js" defer></script>
-</body>
-
+        <script type="module" src="/src/main.jsx"></script>
+    </body>
 </html>

@@ -1,35 +1,16 @@
-# Assignment Planner
+# React + Vite
 
-![alt text](image.png)
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Lightweight, fast, no-backend planner to track assignments by course with due dates, priorities, status, and reminders.
+Currently, two official plugins are available:
 
-**Live:** https://a2rp.github.io/assignment-planner/  
-**Code:** https://github.com/a2rp/assignment-planner
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
----
+## React Compiler
 
-## Features
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
--   Add / edit assignments (Title, Course, Due date & time, Priority, Estimate, Status, Notes)
--   Search, filter (Course / Priority / Status / Hide done) and sort (Due / Priority / Course / Title / Status)
--   CSV **export/import**
--   Per-row **.ics** calendar export
--   **Web Notifications** reminders (fires while the tab is open)
--   Print-ready stylesheet
+## Expanding the ESLint configuration
 
----
-
-## Clone & Run (Local)
-
-```bash
-# 1) Clone
-git clone https://github.com/a2rp/assignment-planner.git
-cd assignment-planner
-
-# 2) Open directly
-#   – Just open index.html in your browser
-#      OR run a simple server (recommended):
-npx serve .
-# or: python -m http.server 5173
-```
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
