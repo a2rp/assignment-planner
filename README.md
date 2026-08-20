@@ -4,7 +4,7 @@ A modern and responsive assignment planning application built with React for org
 
 The application runs entirely in the browser and stores assignment data locally, so no backend or account is required.
 
-![Assignment Planner Preview](public/preview.png)
+![Assignment Planner Preview](screenshot.png)
 
 ## Features
 
