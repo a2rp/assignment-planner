@@ -1,4 +1,3 @@
-import React from "react";
 import { FiAlertTriangle, FiRefreshCw, FiTrash2, FiX } from "react-icons/fi";
 
 import { Styled } from "./styled";

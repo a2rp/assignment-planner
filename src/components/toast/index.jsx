@@ -1,4 +1,3 @@
-import React from "react";
 import { FiAlertCircle, FiCheckCircle, FiInfo, FiX } from "react-icons/fi";
 
 import { Styled } from "./styled";

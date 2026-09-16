@@ -1,4 +1,3 @@
-import React from "react";
 import { FiDownload, FiPrinter, FiTrash2, FiUpload, FiX } from "react-icons/fi";
 
 import { Styled } from "./styled";

@@ -1,4 +1,3 @@
-import React from "react";
 import { FiClock, FiSave, FiTrash2, FiX } from "react-icons/fi";
 
 import { Styled } from "./styled";

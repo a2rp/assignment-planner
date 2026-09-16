@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useEffect, useMemo, useState } from "react";
+import { Suspense, lazy, useEffect, useMemo, useState } from "react";
 import ConfirmModal from "./components/confirmModal";
 import Header from "./components/header";
 import AssignmentForm from "./components/assignmentForm";
@@ -74,7 +74,6 @@ const App = () => {
         updateEditField,
         saveEdit,
 
-        updateAssignment,
         deleteAssignment,
         clearAllAssignments,
         toggleDone,
