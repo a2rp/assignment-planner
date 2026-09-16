@@ -130,10 +130,19 @@ const Footer = () => {
             </div>
 
             <div className="bottom">
-                <p>© {currentYear} Assignment Planner. All rights reserved.</p>
+                <p>
+                    Copyright &copy; {currentYear}{" "}
+                    <a
+                        href="https://www.ashishranjan.net"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Ashish Ranjan
+                    </a>
+                </p>
 
                 <p>
-                    Developed by{" "}
+                    Assignment Planner
                     <a
                         href="https://www.ashishranjan.net"
                         target="_blank"
